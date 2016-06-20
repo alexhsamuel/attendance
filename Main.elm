@@ -1,4 +1,4 @@
-module Attendance exposing (..)
+module Main exposing (..)
 
 import CheckIn
 import Debug exposing (log)
@@ -6,7 +6,9 @@ import Dict
 import Html exposing (..)
 import Html.App
 import Html.Attributes exposing (..)
-import LogIn
+import Login.State
+import Login.Types
+import Login.View
 import Model
 import Msg exposing (..)
 import Navigation
@@ -16,11 +18,11 @@ update : Msg -> Model.Model -> (Model.Model, Cmd Msg)
 update msg model = 
     let model = (log "model" model) in
     case msg of
-        LogInMsg msg -> 
+        LoginMsg msg -> 
             let
-                (newModel, cmd) = LogIn.update msg model.logIn
+                (newModel, cmd) = Login.State.update msg model.login
             in
-                ({ model | logIn = newModel }, Cmd.map LogInMsg cmd)
+                ({ model | login = newModel }, Cmd.map LoginMsg cmd)
 
 notFoundView : Html Msg
 notFoundView =
@@ -29,7 +31,8 @@ notFoundView =
 page : Model.Model -> Html Msg
 page model =
     case model.route of
-        Routing.LogInRoute -> Html.App.map LogInMsg (LogIn.view model.logIn)
+        Routing.LoginRoute 
+            -> Html.App.map LoginMsg (Login.View.view model.login)
         Routing.CheckInRoute -> CheckIn.view model
         Routing.NotFoundRoute -> notFoundView
 

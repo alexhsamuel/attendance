@@ -1,28 +1,9 @@
-module LogIn exposing (..)
+module Login.View exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-
-type alias Model =
-    { username : String
-    , password : String
-    }
-
-initialModel : Model
-initialModel = Model "" ""
-
-type Msg
-    = ChangeUsername String
-    | ChangePassword String
-
-update : Msg -> Model -> (Model, Cmd Msg)
-update msg model =
-    case msg of
-        ChangeUsername username 
-            -> ({ model | username = username }, Cmd.none)
-        ChangePassword password 
-            -> ({ model | password = password }, Cmd.none)
+import Login.Types exposing (..)
 
 view : Model -> Html Msg
 view model =

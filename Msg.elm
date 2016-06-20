@@ -1,6 +1,6 @@
 module Msg exposing (..)
 
-import LogIn
+import Login.Types
 
 type Msg
-    = LogInMsg LogIn.Msg
+    = LoginMsg Login.Types.Msg

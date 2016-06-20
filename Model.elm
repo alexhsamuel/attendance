@@ -1,7 +1,8 @@
 module Model exposing (..)
 
 import Dict
-import LogIn
+import Login.State
+import Login.Types
 import Routing
 
 students : List String
@@ -25,7 +26,7 @@ type alias Model =
     , attendance : Dict.Dict String Bool
 
     -- Page models
-    , logIn : LogIn.Model
+    , login : Login.Types.Model
     }
 
 initialModel : Routing.Route -> Model
@@ -35,6 +36,6 @@ initialModel route =
     , students = students
     , attendance = Dict.fromList (List.map (\n -> (n, False)) students)
 
-    , logIn = LogIn.initialModel
+    , login = Login.State.initialModel
     }
 

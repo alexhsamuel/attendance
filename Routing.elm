@@ -6,13 +6,13 @@ import String
 import UrlParser exposing (..)
 
 type Route
-    = LogInRoute
+    = LoginRoute
     | CheckInRoute
     | NotFoundRoute
 
 matchers : Parser (Route -> a) a
 matchers = oneOf
-    [ format LogInRoute (s "")
+    [ format LoginRoute (s "")
     , format CheckInRoute (s "checkin")
     ]
 

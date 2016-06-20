@@ -6,7 +6,7 @@ import Login.Types
 import Routing
 
 students : List String
-students = 
+students =
     [ "alex"
     , "beth"
     , "chris"
@@ -20,8 +20,7 @@ students =
     ]
 
 type alias Model =
-    { student : Maybe String
-    , route : Routing.Route
+    { route : Routing.Route
     , students : List String
     , attendance : Dict.Dict String Bool
 
@@ -30,12 +29,10 @@ type alias Model =
     }
 
 initialModel : Routing.Route -> Model
-initialModel route = 
-    { student = Nothing
-    , route = route
+initialModel route =
+    { route = route
     , students = students
     , attendance = Dict.fromList (List.map (\n -> (n, False)) students)
 
     , login = Login.State.initialModel
     }
-

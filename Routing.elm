@@ -12,8 +12,9 @@ type Route
 
 matchers : Parser (Route -> a) a
 matchers = oneOf
-    [ format LoginRoute (s "")
+    [ format LoginRoute (s "login")
     , format CheckInRoute (s "checkin")
+    , format LoginRoute (s "")
     ]
 
 hashParser : Navigation.Location -> Result String Route
@@ -31,3 +32,5 @@ routeFromResult result =
         Ok route -> route
         Err string -> NotFoundRoute
 
+toLogin = Navigation.modifyUrl "#login"
+toCheckin = Navigation.modifyUrl "#checkin"

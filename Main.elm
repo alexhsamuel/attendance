@@ -16,7 +16,7 @@ import Routing exposing (Route)
 
 update : Msg -> Model.Model -> (Model.Model, Cmd Msg)
 update msg model = 
-    let model = (log "model" model) in
+    let model = model in
     case msg of
         LoginMsg msg -> 
             let

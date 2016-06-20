@@ -1,6 +1,7 @@
 module Login.State exposing (..)
 
 import Login.Types exposing (..)
+import Routing
 
 initialModel : Model
 initialModel = Model "" "" Nothing
@@ -13,5 +14,6 @@ update msg model =
         ChangePassword password 
             -> ({ model | password = password }, Cmd.none)
         Submit 
+            -- FIXME: Check username!
             -- FIXME: Check password!
-            -> ({ model | login = Just model.username }, Cmd.none)
+            -> ({ model | login = Just model.username }, Routing.toCheckin)

@@ -19,6 +19,6 @@ view model =
             , placeholder "Password"
             , onInput ChangePassword ] 
             []
-        , button [] [ text "Log In" ]
+        , button [ onClick Submit ] [ text "Log In" ]
         ]
 

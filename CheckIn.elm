@@ -5,8 +5,8 @@ import Model exposing (Model)
 import Msg exposing (Msg)
 
 greeting model
-    = case model.student of
-        Just student -> "Hello, " ++ student ++ "!"
+    = case model.login.login of
+        Just login -> "Hello, " ++ login ++ "!"
         Nothing -> "Please log in."
 
 view : Model -> Html Msg

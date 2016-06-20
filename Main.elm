@@ -4,15 +4,23 @@ import CheckIn
 import Debug exposing (log)
 import Dict
 import Html exposing (..)
+import Html.App
 import Html.Attributes exposing (..)
 import LogIn
 import Model
-import Msg exposing (Msg)
+import Msg exposing (..)
 import Navigation
 import Routing exposing (Route)
 
 update : Msg -> Model.Model -> (Model.Model, Cmd Msg)
-update msg model = (model, Cmd.none)
+update msg model = 
+    let model = (log "model" model) in
+    case msg of
+        LogInMsg msg -> 
+            let
+                (newModel, cmd) = LogIn.update msg model.logIn
+            in
+                ({ model | logIn = newModel }, Cmd.map LogInMsg cmd)
 
 notFoundView : Html Msg
 notFoundView =
@@ -21,7 +29,7 @@ notFoundView =
 page : Model.Model -> Html Msg
 page model =
     case model.route of
-        Routing.LogInRoute -> LogIn.view model
+        Routing.LogInRoute -> Html.App.map LogInMsg (LogIn.view model.logIn)
         Routing.CheckInRoute -> CheckIn.view model
         Routing.NotFoundRoute -> notFoundView
 

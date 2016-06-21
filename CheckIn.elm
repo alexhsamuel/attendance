@@ -17,14 +17,27 @@ greeting model =
 formatAttendance name value =
     [ text (name ++ ": " ++ (if value then "present" else "absent")) ]
 
+checkin model =
+    case model.login.login of
+        Just login ->
+            div [ style [ ("border", "1px solid black") ] ]
+            [ text "Are you here today?"
+            , button [] [ text "PRESENT" ]
+            , button [] [ text "ABSENT" ]
+            ]
+        Nothing -> div [] []
+
 view : Model -> Html Msg
 view model =
     div []
         [ div [] (greeting model)
-        , text "Today's attendance: "
-        , ul []
-          (List.map
-              (\(n, a) -> li [] (formatAttendance n a))
-              (Dict.toList model.attendance)
-          )
+        , checkin model
+        , div []
+            [ text "Today's attendance: "
+            , ul []
+              (List.map
+                  (\(n, a) -> li [] (formatAttendance n a))
+                  (Dict.toList model.attendance)
+              )
+            ]
         ]
